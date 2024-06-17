@@ -6,7 +6,16 @@ return await TodoModel.create(payload)
 };
 
 const list =async()=>{
-    return await TodoModel.find();
+    return await TodoModel.aggregate([
+        {
+          '$lookup': {
+            'from': 'subtasks', 
+            'localField': '_id', 
+            'foreignField': 'todo', 
+            'as': 'subtasks'
+          }
+        }
+      ])
 
 };
 
@@ -15,7 +24,11 @@ return await TodoModel.findOne({_id:id});
 };
 
 const updateById =async(id,payload)=>{
-    return await TodoModel.updateOne({_id:id},payload)
+    const {status}= payload;
+    return await TodoModel.findOneAndUpdate({_id:id},
+        {status},
+        {new:true}
+    )
 
 };
 
