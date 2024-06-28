@@ -1,18 +1,18 @@
-import Car from "./Car";
-import GoalResult from "./Goale";
-import LogicalOperator from "./LogicalOperator";
-import List from "./List";
+import{Container,Col,Row} from 'react-bootstrap'
+import Todo from './Pages/Todo';
+import Demo from './Demo';
 function App() {
-  const cars=["bmw","ferari","tesla"]
+  
   return (
-    <div>
-      <Car color="black" wheels="4" />
-      <hr/>
-
-      <GoalResult isGoal={true} />
-      <hr/>
-      <List cars={cars}/>
-    </div>
+    <>
+          <Container>
+      
+      
+      <Row className='text-center'>
+    <Demo/>
+      </Row>
+    </Container>
+    </>
   );
 }
 
