@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const todoController = require("../server/modules/todos/todo.controller");
-const subtaskController = require("../server/modules/subtasks/subtask.controller");
+const todoController = require("../modules/todos/todo.controller");
+const subtaskController = require("../modules/subtasks/subtask.controller");
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 var setup = {
@@ -16,7 +16,7 @@ var setup = {
       todo: todo1._id,
     });
     const sub2 = await subtaskController.create({
-      title: "Ceck your shoe size",
+      title: "Check your shoe size",
       todo: todo2._id,
     });
     console.log("---------DONE--------");

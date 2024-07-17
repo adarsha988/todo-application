@@ -1,19 +1,30 @@
-import{Container,Col,Row} from 'react-bootstrap'
+// import "./App.css"
+import{Container,Row} from 'react-bootstrap'
 import Todo from './Pages/Todo';
-import Demo from './Demo';
+import Toaster from "./Components/Toaster"
+import { useToastContext } from "./contexts/ToastContext";
+import React from 'react';
+import FormComponent from './form';
+import Dropdown from"./DropDown"
+
 function App() {
+  const {toast}=useToastContext();
+ 
   
-  return (
+  return ( 
     <>
-          <Container>
+    
+    
+   
+ <Container>
+     <Row className='text-center'> 
       
-      
-      <Row className='text-center'>
-    <Demo/>
-      </Row>
-    </Container>
-    </>
-  );
+        <Todo/> 
+    </Row>
+  </Container>
+ <Toaster showToaster={toast?.show} msg={toast?.msg} title={toast?.title}/>
+</>
+  )
 }
 
 export default App;

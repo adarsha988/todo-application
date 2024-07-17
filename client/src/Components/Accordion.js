@@ -1,14 +1,22 @@
 import React from 'react'
 import  MsgAlert from './Alert';
+import { URLS } from '../constants';
 import {Accordion,Form,Col,Tooltip,OverlayTrigger } from 'react-bootstrap';
 import SubtaskList from './SubtaskList';
 import AddInputGroup from './AddInputGroup';
 import TaskStatus from './TaskStatus';
+import { useApiContext } from '../contexts';
 
 
 function TaskAccordion({tasks}) {
- const handleTaskChange=()=>{
-  alert(" hello everyone")
+  const {updateStatus}=useApiContext();
+ const handleTaskChange=async(e,todoId)=>{
+  
+  const payload={
+    status :e?.target?.checked?"completed":"pending",
+  
+  };
+  await updateStatus({url:URLS.TODOS,id:todoId,payload})
  }
 
 
@@ -28,7 +36,7 @@ function TaskAccordion({tasks}) {
                type="checkbox" 
                checked={
                 task && task?.status === "completed" ? true:false}
-                onChange={()=> handleTaskChange()}/>
+                onChange={(e)=> handleTaskChange(e,task?._id)}/>
                &nbsp;
                <OverlayTrigger
                       placement="right"
@@ -36,7 +44,8 @@ function TaskAccordion({tasks}) {
                       delay={{show:250,hide:260}}
                    >
                       <span>
-                        {task?.title.substring(0, 20).concat("...")}
+                        {task?.title.length>20?task?.title.substring(0, 20).concat("...")
+                        :task?.title}
                       </span>
                     </OverlayTrigger>
                </Form.Group>
@@ -68,8 +77,12 @@ function TaskAccordion({tasks}) {
 
                )}
 
-               <AddInputGroup label="Add new Subtask" palceholder="Eg. Gather Clothes " 
-               button="Add new Subtask"/>
+               <AddInputGroup 
+               url={URLS.SUBTASK}
+               taskId={task?._id}
+               label="Add new Subtask" 
+               palceholder="Eg. Gather Clothes " 
+               button="Add new Subtask" />
                 </Accordion.Body>
               </Accordion.Item>
            
