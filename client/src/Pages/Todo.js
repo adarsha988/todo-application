@@ -8,7 +8,7 @@ import Loading from "../Components/Loading";
 import { useApiContext } from "../contexts";
 
 
-function Todo() {
+function Todo({isDark}) {
 
   const {data:dbList,error,loading,list}=useApiContext();
 

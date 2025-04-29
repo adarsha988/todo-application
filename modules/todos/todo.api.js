@@ -53,7 +53,6 @@ catch(e){
 //delete by id
 router.delete("/:id",async(req,res,next)=>{ 
      try{
-          console.log("hello")
           const {id}=req.params
          const result= await todoController.deleteById(id)
          res.json({data:result,msg:"Success"});

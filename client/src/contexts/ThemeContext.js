@@ -1,36 +1,36 @@
-// import {createContext,useState,useContext } from "react"
+import {createContext,useState,useContext } from "react"
 
-// export const ThemeContext= createContext(null);
+export const ThemeContext= createContext(null);
 
-// export default function ThemeContextProvider({children}) {
+export default function ThemeContextProvider({children}) {
   
-//     const [theme,setTheme] = useState("light-theme");
+    const [theme,setTheme] = useState("light");
     
-//     const toggleTheme = ()=>{
+    const toggleTheme = ()=>{
 
-// if (theme==="light-theme"){
+if (theme==="light"){
  
-//   setTheme("dark-theme")
-// }
-// else
-//    { setTheme("light-theme")
+  setTheme("dark")
+}
+else
+   { setTheme("light")
 
-//     }
+    }
 
-//     return theme;
-//   }
-//     return (
-//     <><ThemeContext.Provider value={{theme,toggleTheme}}>
-//         {children}
-//         </ThemeContext.Provider></>
-//   )
-// }
-//  export const useThemeContext = ()=>{
+    return theme;
+  }
+    return (
+    <><ThemeContext.Provider value={{theme,toggleTheme}}>
+        {children}
+        </ThemeContext.Provider></>
+  )
+}
+ export const useThemeContext = ()=>{
 
-//     const context =useContext(ThemeContext)
-//  if (!context){
-//   throw new Error("Context must br wrapped inside context Provider");
-//  }
+    const context =useContext(ThemeContext)
+ if (!context){
+  throw new Error("Context must br wrapped inside context Provider");
+ }
 
-// return context;
-//  }
+return context;
+ }
