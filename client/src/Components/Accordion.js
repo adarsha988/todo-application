@@ -1,24 +1,37 @@
 import React from 'react'
 import  MsgAlert from './Alert';
+import { MdDelete } from "react-icons/md";
 import { URLS } from '../constants';
 import {Accordion,Form,Col,Tooltip,OverlayTrigger } from 'react-bootstrap';
 import SubtaskList from './SubtaskList';
 import AddInputGroup from './AddInputGroup';
+import { popUpAlert } from '../utils/swal';
 import TaskStatus from './TaskStatus';
 import { useApiContext } from '../contexts';
 
 
 function TaskAccordion({tasks}) {
-  const {updateStatus}=useApiContext();
- const handleTaskChange=async(e,todoId)=>{
-  
+  const {updateStatus,deleteById}=useApiContext();
+ 
+ 
+  const handleTaskChange=async(e,todoId)=>{
   const payload={
     status :e?.target?.checked?"completed":"pending",
-  
   };
-  await updateStatus({url:URLS.TODOS,id:todoId,payload})
+  await updateStatus({url:URLS.TODOS,id:todoId,payload}) // update checkbox
  }
 
+ // Function to delete todo using todoId
+
+const handleDelete=async(todoId)=>{
+
+    if (todoId){
+    const result= await popUpAlert(); // return true or false
+    if (!result) return false;
+    await deleteById({url:URLS.TODOS,id:todoId}) // delete todo
+    return null;
+    }
+   };
 
   return (
     
@@ -67,7 +80,9 @@ function TaskAccordion({tasks}) {
             
                </Col>
                 
-               
+               <Col>
+                <span className="p-2"> <MdDelete onClick={()=>{ handleDelete(task?._id)}}/></span>
+               </Col>
               
                 </Accordion.Header>
                 <Accordion.Body>

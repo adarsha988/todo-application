@@ -11,6 +11,6 @@ const SubtaskSchema = new Schema({
   },
   todo: { type: ObjectId, ref: "Todo" },
   ...commonSchema,
-});
+});;
 
 module.exports = model("Subtask", SubtaskSchema);

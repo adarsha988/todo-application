@@ -2,8 +2,9 @@
 const TodoModel=require("./todo.model");
 const SubtaskModel=require("../subtasks/subtask.model")
 
-const create =async (payload)=>{
-return await TodoModel.create(payload)
+const create =async (data)=>{
+ const {title}=data;
+return await TodoModel.create(title)
 };
 
 const list =async()=>{

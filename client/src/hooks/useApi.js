@@ -26,10 +26,11 @@ const[loading,setLoading]=useState(false);
         setLoading(false);}
       },[])
     
-    const create=async({url,payload})=>{
-        try{
+    const create=async(url,payload)=>{
+        try{ 
+        
         const data =await axios.post(url,payload)
- 
+       
        if(data){
 
         toggle(
@@ -37,6 +38,8 @@ const[loading,setLoading]=useState(false);
             msg:` ${payload?.title} created` ,
             title: url.includes("todos")?"Todo Created":"Subtask Created"}
        )
+
+       return data;
        }  }
         catch(e){
           const msg = e ? e.message:"create API failed";

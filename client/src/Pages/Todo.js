@@ -23,12 +23,15 @@ if (error) return <>{JSON.stringify(error)}</>
   return (
     <>
       <Title title="TODO App" />
+        {/* Calling  addInputComponent for todos */}
       <AddInputGroup 
       label="Add new Todo ? " 
       palceholder="Eg. Do Laundry"
       button="Add the task"
       url={URLS.TODOS}
+      
       />
+
       <TaskAccordion  tasks={dbList}/>
   
     </>

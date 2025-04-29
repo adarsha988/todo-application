@@ -4,7 +4,7 @@ const todoController = require('./todo.controller')
 //create
 
 router.post("/", async(req,res,next)=>{
-     try{
+      try{
          const result= await todoController.create(req.body)
           res.json({data:result,msg:"Success"})
      }
@@ -53,6 +53,7 @@ catch(e){
 //delete by id
 router.delete("/:id",async(req,res,next)=>{ 
      try{
+          console.log("hello")
           const {id}=req.params
          const result= await todoController.deleteById(id)
          res.json({data:result,msg:"Success"});
